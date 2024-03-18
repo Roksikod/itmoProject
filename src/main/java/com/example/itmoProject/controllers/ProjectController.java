@@ -42,7 +42,7 @@ public class ProjectController {
     @Operation(summary = "Получение всех проектов")
     public Page<ProjectInfoResponse> getAllProjects(@RequestParam(defaultValue = "1") Integer page,
                                                     @RequestParam(defaultValue = "10") Integer perPage,
-                                                    @RequestParam(defaultValue = "title") String sort,
+                                                    @RequestParam(defaultValue = "titleProject") String sort,
                                                     @RequestParam(defaultValue = "ASC") Sort.Direction order,
                                                     @RequestParam(required = false) String filter) {
 
