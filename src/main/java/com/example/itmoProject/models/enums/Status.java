@@ -1,6 +1,6 @@
 package com.example.itmoProject.models.enums;
 
-public enum StudentStatus {
+public enum Status {
     CREATED,
     UPDATED,
     DELETED

@@ -1,7 +1,7 @@
 package com.example.itmoProject.models.enums;
 
-public enum ProjectStatus {
+public enum LessonStatus {
     STARTED,
     IN_PROGRESS,
-   PUBLISHED
+    PASSED
 }
