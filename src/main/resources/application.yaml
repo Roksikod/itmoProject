@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/itmo
+    url: jdbc:postgresql://localhost:5432/progress_app
     username: postgres
     password: admin
     driver-class-name: org.postgresql.Driver
