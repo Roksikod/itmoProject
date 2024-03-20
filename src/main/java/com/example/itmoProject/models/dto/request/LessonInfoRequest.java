@@ -1,9 +1,6 @@
 package com.example.itmoProject.models.dto.request;
 
-import com.example.itmoProject.models.enums.Level;
-import com.example.itmoProject.models.enums.ProjectStatus;
-import com.example.itmoProject.models.enums.Status;
-import com.example.itmoProject.models.enums.Topic;
+import com.example.itmoProject.models.enums.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -18,13 +15,14 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProjectInfoRequest {
-    @NotEmpty(message = "Title of project must be set")
-    String titleProject;
+public class LessonInfoRequest {
+    @NotEmpty(message = "Title of lesson must be set")
+    String titleLesson;
+    @NotEmpty(message = "Number of lesson must be set")
     Integer numberLesson;
     Level level;
-    Boolean isApproved;
+    Boolean isOpened;
     Topic topic;
-    ProjectStatus projectStatus;
+    LessonStatus lessonStatus;
     Status status;
 }

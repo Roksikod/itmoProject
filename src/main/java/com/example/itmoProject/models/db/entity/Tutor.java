@@ -15,10 +15,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "students")
+@Table(name = "tutors")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Student {
-
+public class Tutor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -54,10 +53,6 @@ public class Student {
     Status status;
 
     @OneToMany
-    @JsonManagedReference(value ="student_projects")
-    List<Project> projects;
-
-    @OneToMany
-    @JsonManagedReference(value ="student_lessons")
-    List<Lesson> lessons;
+    @JsonManagedReference(value = "tutor_students")
+    List<Student> students;
 }

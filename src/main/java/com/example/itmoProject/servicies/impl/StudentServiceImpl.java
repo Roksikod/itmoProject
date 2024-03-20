@@ -4,9 +4,10 @@ import com.example.itmoProject.exceptions.CustomException;
 import com.example.itmoProject.models.db.entity.Student;
 import com.example.itmoProject.models.db.repositories.StudentRepo;
 import com.example.itmoProject.models.dto.request.StudentInfoRequest;
+import com.example.itmoProject.models.dto.response.LessonInfoResponse;
 import com.example.itmoProject.models.dto.response.ProjectInfoResponse;
 import com.example.itmoProject.models.dto.response.StudentInfoResponse;
-import com.example.itmoProject.models.enums.StudentStatus;
+import com.example.itmoProject.models.enums.Status;
 import com.example.itmoProject.servicies.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +20,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.CollectionUtils;
 import utils.PaginationUtil;
 
 @Slf4j
@@ -48,12 +46,12 @@ public class StudentServiceImpl implements StudentService {
         }
 
         studentRepo.findByEmail(email)
-                .ifPresent(user -> {
+                .ifPresent(tutor -> {
                     throw new CustomException("Email already exists", HttpStatus.CONFLICT);
                 });
 
         Student student = mapper.convertValue(request, Student.class);
-        student.setStatus(StudentStatus.CREATED);
+        student.setStatus(Status.CREATED);
         student.setCreatedAt(LocalDateTime.now());
         student = studentRepo.save(student);
 
@@ -82,6 +80,7 @@ public class StudentServiceImpl implements StudentService {
         student.setAge(request.getAge() == null ? student.getAge() : request.getAge());
         student.setGender(request.getGender() == null ? student.getGender() : request.getGender());
 
+
         student.setUpdatedAt(LocalDateTime.now());
         student = studentRepo.save(student);
 
@@ -91,7 +90,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void deleteStudent(Long id) {
         Student student = getStudentDb(id);
-        student.setStatus(StudentStatus.DELETED);
+        student.setStatus(Status.DELETED);
         student.setUpdatedAt(LocalDateTime.now());
         studentRepo.save(student);
     }
@@ -124,6 +123,22 @@ public class StudentServiceImpl implements StudentService {
                 .collect(Collectors.toList());
 
         return projects;
+    }
+    @Override
+    public Student updateStudentLessonsList(Student student) {
+        return studentRepo.save(student);
+    }
+
+
+    @Override
+    public List<LessonInfoResponse> getStudentLessonsList(Long studentId) {
+        Student student = getStudentDb(studentId);
+        List<LessonInfoResponse> lessons = student.getLessons()
+                .stream()
+                .map(lesson -> mapper.convertValue(lesson, LessonInfoResponse.class))
+                .collect(Collectors.toList());
+
+        return lessons;
     }
 
 }

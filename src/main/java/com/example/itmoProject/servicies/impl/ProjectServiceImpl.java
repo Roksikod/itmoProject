@@ -8,6 +8,7 @@ import com.example.itmoProject.models.dto.request.ProjectInfoRequest;
 import com.example.itmoProject.models.dto.response.ProjectInfoResponse;
 import com.example.itmoProject.models.dto.response.StudentInfoResponse;
 import com.example.itmoProject.models.enums.ProjectStatus;
+import com.example.itmoProject.models.enums.Status;
 import com.example.itmoProject.servicies.ProjectService;
 import com.example.itmoProject.servicies.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,7 +45,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
 
         Project project = mapper.convertValue(request, Project.class);
-        project.setStatus(ProjectStatus.CREATED);
+        project.setStatus(Status.CREATED);
         project.setCreatedAt(LocalDateTime.now());
         project = projectRepo.save(project);
 
@@ -81,7 +82,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void deleteProject(Long id) {
         Project project = getProjectDb(id);
-        project.setStatus(ProjectStatus.DELETED);
+        project.setStatus(Status.DELETED);
         project.setUpdatedAt(LocalDateTime.now());
         projectRepo.save(project);
     }
