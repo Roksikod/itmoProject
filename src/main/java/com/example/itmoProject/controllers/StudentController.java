@@ -46,14 +46,21 @@ public class StudentController {
     @GetMapping("/all")
     @Operation(summary = "Получение всех студентов")
     public Page<StudentInfoResponse> getAllStudents(@RequestParam(defaultValue = "1") Integer page,
-                                              @RequestParam(defaultValue = "10") Integer perPage,
-                                              @RequestParam(defaultValue = "firstName") String sort,
-                                              @RequestParam(defaultValue = "ASC") Sort.Direction order) {
+                                                    @RequestParam(defaultValue = "10") Integer perPage,
+                                                    @RequestParam(defaultValue = "firstName") String sort,
+                                                    @RequestParam(defaultValue = "ASC") Sort.Direction order) {
         return studentService.getAllStudents(page, perPage, sort, order);
     }
+
     @GetMapping("/studentProjectsList/{id}")
     @Operation(summary = "Получение списка проектов студента")
     public List<ProjectInfoResponse> getStudentProjectsList(@PathVariable Long id) {
         return studentService.getStudentProjectsList(id);
+    }
+
+    @PostMapping("/linkTutorStudent/{tutorId}/{studentId}")
+    @Operation(summary = "Назначение студента куратору")
+    public StudentInfoResponse linkTutorStudent(@PathVariable Long tutorId, @PathVariable Long studentId) {
+        return studentService.linkTutorStudent(tutorId, studentId);
     }
 }

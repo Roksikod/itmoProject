@@ -4,7 +4,7 @@ import com.example.itmoProject.exceptions.CustomException;
 import com.example.itmoProject.models.db.entity.Tutor;
 import com.example.itmoProject.models.db.repositories.TutorRepo;
 import com.example.itmoProject.models.dto.request.TutorInfoRequest;
-import com.example.itmoProject.models.dto.response.StudentInfoResponse;
+import com.example.itmoProject.models.dto.response.CourseInfoResponse;
 import com.example.itmoProject.models.dto.response.TutorInfoResponse;
 import com.example.itmoProject.models.enums.Status;
 import com.example.itmoProject.servicies.TutorService;
@@ -107,17 +107,17 @@ public class TutorServiceImpl implements TutorService {
     }
 
     @Override
-    public Tutor updateTutorStudentsList(Tutor tutor) {
+    public Tutor updateStudentsList(Tutor tutor) {
         return tutorRepo.save(tutor);
     }
 
 
     @Override
-    public List<StudentInfoResponse> getTutorStudentsList(Long tutorId) {
+    public List<CourseInfoResponse> getStudentsList(Long tutorId) {
         Tutor tutor = getTutorDb(tutorId);
-        List<StudentInfoResponse> students = tutor.getStudents()
+        List<CourseInfoResponse> students = tutor.getStudents()
                 .stream()
-                .map(student -> mapper.convertValue(student, StudentInfoResponse.class))
+                .map(student -> mapper.convertValue(student, CourseInfoResponse.class))
                 .collect(Collectors.toList());
 
         return students;

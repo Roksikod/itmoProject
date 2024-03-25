@@ -11,39 +11,20 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Getter
 @Setter
 @Entity
-@Table(name = "students")
+@Table(name = "courses")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Student {
-
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name = "email")
-    String email;
-
-    @Column(name = "nick_tg")
-    String nickTg;
-
-    @Column(name = "first_name")
-    String firstName;
-
-    @Column(name = "last_name")
-    String lastName;
-
-    @Column(name = "city")
-    String city;
-
-    @Column(name = "age")
-    Integer age;
-
-    @Enumerated(EnumType.STRING)
-    Gender gender;
+    @Column(name = "title_course")
+    String titleCourse;
 
     @Column(name = "created_at")
     LocalDateTime createdAt;
@@ -53,16 +34,5 @@ public class Student {
 
     @Enumerated(EnumType.STRING)
     Status status;
-
-    @OneToMany
-    @JsonManagedReference(value ="student_projects")
-    List<Project> projects;
-
-    @OneToMany
-    @JsonManagedReference(value ="student_lessons")
-    List<Lesson> lessons;
-
-    @ManyToOne
-    @JsonBackReference(value = "tutor_students")
-    Tutor tutor;
 }
+

@@ -15,5 +15,5 @@ import lombok.experimental.SuperBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProjectInfoResponse extends ProjectInfoRequest {
     Long id;
-    StudentInfoResponse student;
+    CourseInfoResponse student;
 }

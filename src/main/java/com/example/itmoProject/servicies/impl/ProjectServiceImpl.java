@@ -6,8 +6,7 @@ import com.example.itmoProject.models.db.entity.Student;
 import com.example.itmoProject.models.db.repositories.ProjectRepo;
 import com.example.itmoProject.models.dto.request.ProjectInfoRequest;
 import com.example.itmoProject.models.dto.response.ProjectInfoResponse;
-import com.example.itmoProject.models.dto.response.StudentInfoResponse;
-import com.example.itmoProject.models.enums.ProjectStatus;
+import com.example.itmoProject.models.dto.response.CourseInfoResponse;
 import com.example.itmoProject.models.enums.Status;
 import com.example.itmoProject.servicies.ProjectService;
 import com.example.itmoProject.servicies.StudentService;
@@ -38,11 +37,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public ProjectInfoResponse createProject(ProjectInfoRequest request) {
-        Integer numberLesson = request.getNumberLesson();
-
-        if (numberLesson < 1 || numberLesson > 12) {
-            throw new CustomException("Invalid numberLesson", HttpStatus.BAD_REQUEST);
-        }
 
         Project project = mapper.convertValue(request, Project.class);
         project.setStatus(Status.CREATED);
@@ -66,7 +60,6 @@ public class ProjectServiceImpl implements ProjectService {
         Project project = getProjectDb(id);
 
         project.setTitleProject(request.getTitleProject() == null ? project.getTitleProject() : request.getTitleProject());
-        project.setNumberLesson(request.getNumberLesson() == null ? project.getNumberLesson() : request.getNumberLesson());
         project.setLevel(request.getLevel() == null ? project.getLevel() : request.getLevel());
 
         project.setIsApproved(request.getIsApproved() == null ? project.getIsApproved() : request.getIsApproved());
@@ -112,10 +105,10 @@ public class ProjectServiceImpl implements ProjectService {
         project.setStudent(student);
         project = projectRepo.save(project);
 
-        StudentInfoResponse studentInfoResponse = mapper.convertValue(student, StudentInfoResponse.class);
+        CourseInfoResponse courseInfoResponse = mapper.convertValue(student, CourseInfoResponse.class);
         ProjectInfoResponse projectInfoResponse = mapper.convertValue(project, ProjectInfoResponse.class);
 
-        projectInfoResponse.setStudent(studentInfoResponse);
+        projectInfoResponse.setStudent(courseInfoResponse);
         return projectInfoResponse;
     }
 }
