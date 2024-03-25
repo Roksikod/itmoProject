@@ -1,10 +1,8 @@
 package com.example.itmoProject.servicies;
 
-import com.example.itmoProject.models.db.entity.Student;
 import com.example.itmoProject.models.db.entity.Tutor;
 import com.example.itmoProject.models.dto.request.TutorInfoRequest;
-import com.example.itmoProject.models.dto.response.LessonInfoResponse;
-import com.example.itmoProject.models.dto.response.StudentInfoResponse;
+import com.example.itmoProject.models.dto.response.CourseInfoResponse;
 import com.example.itmoProject.models.dto.response.TutorInfoResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -24,7 +22,7 @@ public interface TutorService {
 
     Page<TutorInfoResponse> getAllTutors(Integer page, Integer perPage, String sort, Sort.Direction order);
 
-    Tutor updateTutorStudentsList(Tutor tutor);
+    Tutor updateStudentsList(Tutor tutor);
 
-    List<StudentInfoResponse> getTutorStudentsList(Long tutorId);
+    List<CourseInfoResponse> getStudentsList(Long tutorId);
 }

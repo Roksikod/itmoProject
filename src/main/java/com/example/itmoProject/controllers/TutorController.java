@@ -1,6 +1,6 @@
 package com.example.itmoProject.controllers;
 
-import com.example.itmoProject.models.dto.response.StudentInfoResponse;
+import com.example.itmoProject.models.dto.response.CourseInfoResponse;
 import com.example.itmoProject.models.dto.response.TutorInfoResponse;
 import com.example.itmoProject.servicies.TutorService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,10 +53,10 @@ public class TutorController {
         return tutorService.getAllTutors(page, perPage, sort, order);
     }
 
-    @GetMapping("/tutorStudentsList/{id}")
+    @GetMapping("/getStudentsList/{id}")
     @Operation(summary = "Получение списка студентов куратора")
-    public List<StudentInfoResponse> getTutorStudentsList(@PathVariable Long tutorId) {
-        return tutorService.getTutorStudentsList(tutorId);
+    public List<CourseInfoResponse> getStudentsList(@PathVariable Long id) {
+        return tutorService.getStudentsList(id);
     }
 }
 

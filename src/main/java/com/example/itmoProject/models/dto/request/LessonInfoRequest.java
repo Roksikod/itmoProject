@@ -18,8 +18,7 @@ import javax.validation.constraints.NotEmpty;
 public class LessonInfoRequest {
     @NotEmpty(message = "Title of lesson must be set")
     String titleLesson;
-    @NotEmpty(message = "Number of lesson must be set")
-    Integer numberLesson;
+    String titleProject;
     Level level;
     Boolean isOpened;
     Topic topic;

@@ -26,8 +26,8 @@ public class Project {
     @Column(name = "title_project")
     String titleProject;
 
-    @Column(name = "number_lesson")
-    Integer numberLesson;
+    @Column(name = "title_lesson")
+    String titleLesson;
 
     @Column(name = "level")
     @Enumerated(EnumType.STRING)

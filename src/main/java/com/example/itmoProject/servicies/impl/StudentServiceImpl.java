@@ -2,13 +2,13 @@ package com.example.itmoProject.servicies.impl;
 
 import com.example.itmoProject.exceptions.CustomException;
 import com.example.itmoProject.models.db.entity.Student;
+import com.example.itmoProject.models.db.entity.Tutor;
 import com.example.itmoProject.models.db.repositories.StudentRepo;
 import com.example.itmoProject.models.dto.request.StudentInfoRequest;
-import com.example.itmoProject.models.dto.response.LessonInfoResponse;
-import com.example.itmoProject.models.dto.response.ProjectInfoResponse;
-import com.example.itmoProject.models.dto.response.StudentInfoResponse;
+import com.example.itmoProject.models.dto.response.*;
 import com.example.itmoProject.models.enums.Status;
 import com.example.itmoProject.servicies.StudentService;
+import com.example.itmoProject.servicies.TutorService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -33,6 +33,7 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepo studentRepo;
     private final ObjectMapper mapper;
+    private final TutorService tutorService;
 
     public static final String ERR_MSG = "Student not found";
 
@@ -124,6 +125,7 @@ public class StudentServiceImpl implements StudentService {
 
         return projects;
     }
+
     @Override
     public Student updateStudentLessonsList(Student student) {
         return studentRepo.save(student);
@@ -141,4 +143,20 @@ public class StudentServiceImpl implements StudentService {
         return lessons;
     }
 
+    public StudentInfoResponse linkTutorStudent(Long studentId, Long tutorId) {
+        Student student = getStudentDb(studentId);
+        Tutor tutor = tutorService.getTutorDb(tutorId);
+
+        tutor.getStudents().add(student);
+        tutorService.updateStudentsList(tutor);
+
+        student.setTutor(tutor);
+        student = studentRepo.save(student);
+
+        TutorInfoResponse tutorInfoResponse = mapper.convertValue(tutor, TutorInfoResponse.class);
+        StudentInfoResponse studentInfoResponse = mapper.convertValue(student, StudentInfoResponse.class);
+
+        studentInfoResponse.setTutor(tutorInfoResponse);
+        return studentInfoResponse;
+    }
 }

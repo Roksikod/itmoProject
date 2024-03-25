@@ -6,7 +6,7 @@ import com.example.itmoProject.models.db.entity.Student;
 import com.example.itmoProject.models.db.repositories.LessonRepo;
 import com.example.itmoProject.models.dto.request.LessonInfoRequest;
 import com.example.itmoProject.models.dto.response.LessonInfoResponse;
-import com.example.itmoProject.models.dto.response.StudentInfoResponse;
+import com.example.itmoProject.models.dto.response.CourseInfoResponse;
 import com.example.itmoProject.models.enums.Status;
 import com.example.itmoProject.servicies.LessonService;
 import com.example.itmoProject.servicies.StudentService;
@@ -37,10 +37,6 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public LessonInfoResponse createLesson(LessonInfoRequest request) {
-        Integer numberLesson = request.getNumberLesson();
-        if (numberLesson < 1 || numberLesson > 12) {
-            throw new CustomException("Invalid numberLesson", HttpStatus.BAD_REQUEST);
-        }
 
         Lesson lesson = mapper.convertValue(request, Lesson.class);
         lesson.setStatus(Status.CREATED);
@@ -64,7 +60,6 @@ public class LessonServiceImpl implements LessonService {
         Lesson lesson = getLessonDb(id);
 
         lesson.setTitleLesson(request.getTitleLesson() == null ? lesson.getTitleLesson() : request.getTitleLesson());
-        lesson.setNumberLesson(request.getNumberLesson() == null ? lesson.getNumberLesson() : request.getNumberLesson());
         lesson.setLevel(request.getLevel() == null ? lesson.getLevel() : request.getLevel());
 
         lesson.setIsOpened(request.getIsOpened() == null ? lesson.getIsOpened() : request.getIsOpened());
@@ -111,10 +106,10 @@ public class LessonServiceImpl implements LessonService {
         lesson.setStudent(student);
         lesson = lessonRepo.save(lesson);
 
-        StudentInfoResponse studentInfoResponse = mapper.convertValue(student, StudentInfoResponse.class);
+        CourseInfoResponse courseInfoResponse = mapper.convertValue(student, CourseInfoResponse.class);
         LessonInfoResponse lessonInfoResponse = mapper.convertValue(lesson, LessonInfoResponse.class);
 
-        lessonInfoResponse.setStudent(studentInfoResponse);
+        lessonInfoResponse.setStudent(courseInfoResponse);
         return lessonInfoResponse;
     }
 }

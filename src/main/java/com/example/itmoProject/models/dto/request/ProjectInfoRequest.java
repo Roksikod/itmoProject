@@ -21,7 +21,7 @@ import javax.validation.constraints.NotEmpty;
 public class ProjectInfoRequest {
     @NotEmpty(message = "Title of project must be set")
     String titleProject;
-    Integer numberLesson;
+    String titleLesson;
     Level level;
     Boolean isApproved;
     Topic topic;
