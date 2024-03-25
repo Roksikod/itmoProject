@@ -1,6 +1,6 @@
 package com.example.itmoProject.models.dto.response;
 
-import com.example.itmoProject.models.dto.request.ProjectInfoRequest;
+import com.example.itmoProject.models.dto.request.GroupInfoRequest;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProjectInfoResponse extends ProjectInfoRequest {
+public class GroupInfoResponse extends GroupInfoRequest {
     Long id;
-    StudentInfoResponse student;
+    CourseInfoResponse course;
 }
