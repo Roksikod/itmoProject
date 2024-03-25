@@ -18,4 +18,6 @@ public interface CourseService {
     void deleteCourse(Long id);
 
     List<CourseInfoResponse> getAllCourses();
+
+    Course updateGroupsList(Course course);
 }

@@ -43,7 +43,7 @@ public class CourseController {
         }
 
         @GetMapping("/all")
-        @Operation(summary = "Получение всех потоковых курсов онлайн-школы")
+        @Operation(summary = "Получение всех курсов")
         public List<CourseInfoResponse> getAllCourses() {
             return courseService.getAllCourses();
         }

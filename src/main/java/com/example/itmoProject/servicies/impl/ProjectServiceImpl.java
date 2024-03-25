@@ -6,7 +6,7 @@ import com.example.itmoProject.models.db.entity.Student;
 import com.example.itmoProject.models.db.repositories.ProjectRepo;
 import com.example.itmoProject.models.dto.request.ProjectInfoRequest;
 import com.example.itmoProject.models.dto.response.ProjectInfoResponse;
-import com.example.itmoProject.models.dto.response.CourseInfoResponse;
+import com.example.itmoProject.models.dto.response.StudentInfoResponse;
 import com.example.itmoProject.models.enums.Status;
 import com.example.itmoProject.servicies.ProjectService;
 import com.example.itmoProject.servicies.StudentService;
@@ -105,10 +105,10 @@ public class ProjectServiceImpl implements ProjectService {
         project.setStudent(student);
         project = projectRepo.save(project);
 
-        CourseInfoResponse courseInfoResponse = mapper.convertValue(student, CourseInfoResponse.class);
+        StudentInfoResponse studentInfoResponse = mapper.convertValue(student, StudentInfoResponse.class);
         ProjectInfoResponse projectInfoResponse = mapper.convertValue(project, ProjectInfoResponse.class);
 
-        projectInfoResponse.setStudent(courseInfoResponse);
+        projectInfoResponse.setStudent(studentInfoResponse);
         return projectInfoResponse;
     }
 }

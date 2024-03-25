@@ -1,7 +1,6 @@
 package com.example.itmoProject.models.dto.response;
 
 import com.example.itmoProject.models.dto.request.CourseInfoRequest;
-import com.example.itmoProject.models.dto.request.StudentInfoRequest;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

@@ -7,6 +7,7 @@ import com.example.itmoProject.models.db.repositories.LessonRepo;
 import com.example.itmoProject.models.dto.request.LessonInfoRequest;
 import com.example.itmoProject.models.dto.response.LessonInfoResponse;
 import com.example.itmoProject.models.dto.response.CourseInfoResponse;
+import com.example.itmoProject.models.dto.response.StudentInfoResponse;
 import com.example.itmoProject.models.enums.Status;
 import com.example.itmoProject.servicies.LessonService;
 import com.example.itmoProject.servicies.StudentService;
@@ -106,10 +107,10 @@ public class LessonServiceImpl implements LessonService {
         lesson.setStudent(student);
         lesson = lessonRepo.save(lesson);
 
-        CourseInfoResponse courseInfoResponse = mapper.convertValue(student, CourseInfoResponse.class);
+        StudentInfoResponse studentInfoResponse = mapper.convertValue(student, StudentInfoResponse.class);
         LessonInfoResponse lessonInfoResponse = mapper.convertValue(lesson, LessonInfoResponse.class);
 
-        lessonInfoResponse.setStudent(courseInfoResponse);
+        lessonInfoResponse.setStudent(studentInfoResponse);
         return lessonInfoResponse;
     }
 }
