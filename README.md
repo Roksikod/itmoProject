@@ -1,4 +1,4 @@
-#Study Project ITMO
+# Study Project ITMO
 
 Maven
 Spring Boot
