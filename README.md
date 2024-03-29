@@ -1,7 +1,7 @@
 # Study Project ITMO
 
-Maven
-Spring Boot
-Rest API
-CRUD-functional
-PosgreSQL
+- Maven
+- Spring Boot
+- Rest API
+- CRUD-functional
+- PosgreSQL
