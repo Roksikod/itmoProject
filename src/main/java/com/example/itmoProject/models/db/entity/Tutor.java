@@ -10,7 +10,10 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -55,4 +58,22 @@ public class Tutor {
     @OneToMany
     @JsonManagedReference(value = "tutor_students")
     List<Student> students;
+
+    @ManyToMany
+    @JoinTable(
+            name = "tutors_groups",
+            joinColumns = { @JoinColumn(name = "group_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tutor_id") }
+    )
+    private Set<Tutor> groups = new HashSet<>();
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "tutors_groups",
+            joinColumns = { @JoinColumn(name = "tutor_id") },
+            inverseJoinColumns = { @JoinColumn(name = "group_id") }
+    )
+    private Set<Tutor> tutors = new HashSet<>();
+
 }
