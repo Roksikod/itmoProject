@@ -1,5 +1,6 @@
 package com.example.itmoProject.controllers;
 
+import com.example.itmoProject.models.dto.response.GroupInfoResponse;
 import com.example.itmoProject.models.dto.response.ProjectInfoResponse;
 import com.example.itmoProject.servicies.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -54,4 +55,14 @@ public class ProjectController {
     public ProjectInfoResponse linkProjectStudent(@PathVariable Long studentId, @PathVariable Long projectId) {
         return projectService.linkProjectStudent(studentId, projectId);
     }
+    @GetMapping("/studentProjects/{studentId}")
+    @Operation(summary = "Получение списка проектов студента")
+    public Page<ProjectInfoResponse> getStudentProjects(@PathVariable Long studentId,
+                                                        @RequestParam(defaultValue = "1") Integer page,
+                                                        @RequestParam(defaultValue = "10") Integer perPage,
+                                                        @RequestParam(defaultValue = "titleProject") String sort,
+                                                        @RequestParam(defaultValue = "ASC") Sort.Direction order) {
+        return projectService.getStudentProjects(studentId, page, perPage, sort, order);
+    }
+
 }

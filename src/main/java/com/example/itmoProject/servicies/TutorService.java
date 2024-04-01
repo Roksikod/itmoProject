@@ -24,5 +24,4 @@ public interface TutorService {
 
     Tutor updateStudentsList(Tutor tutor);
 
-    List<CourseInfoResponse> getStudentsList(Long tutorId);
 }

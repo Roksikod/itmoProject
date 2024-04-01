@@ -51,8 +51,17 @@ public class GroupController {
         }
 
         @PostMapping("/linkGroupCourse/{groupId}/{courseId}")
-        @Operation(summary = "Назначение группе курс")
+        @Operation(summary = "Назначение курса для группы")
         public GroupInfoResponse linkGroupCourse(@PathVariable Long groupId, @PathVariable Long courseId) {
                 return groupService.linkGroupCourse(courseId, groupId);
+        }
+        @GetMapping("/courseGroups/{courseId}")
+        @Operation(summary = "Получение списка групп курса")
+        public Page<GroupInfoResponse> getCourseGroups(@PathVariable Long courseId,
+                                                       @RequestParam(defaultValue = "1") Integer page,
+                                                       @RequestParam(defaultValue = "10") Integer perPage,
+                                                       @RequestParam(defaultValue = "titleGroup") String sort,
+                                                       @RequestParam(defaultValue = "ASC") Sort.Direction order) {
+                return groupService.getCourseGroups(courseId, page, perPage, sort, order);
         }
 }

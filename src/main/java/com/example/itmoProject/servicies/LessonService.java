@@ -5,6 +5,8 @@ import com.example.itmoProject.models.dto.response.LessonInfoResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
+import java.util.List;
+
 public interface LessonService {
     LessonInfoResponse createLesson(LessonInfoRequest request);
 
@@ -17,4 +19,6 @@ public interface LessonService {
     LessonInfoResponse linkLessonStudent(Long studentId, Long lessonId);
 
     void deleteLesson(Long id);
+
+    Page<LessonInfoResponse> getStudentLessons(Long studentId, Integer page, Integer perPage, String sort, Sort.Direction order);
 }

@@ -111,4 +111,14 @@ public class ProjectServiceImpl implements ProjectService {
         projectInfoResponse.setStudent(studentInfoResponse);
         return projectInfoResponse;
     }
+    @Override
+    public Page<ProjectInfoResponse> getStudentProjects(Long studentId, Integer page, Integer perPage, String sort, Sort.Direction order) {
+        studentService.getStudentDb(studentId);
+        Pageable request = PaginationUtil.getPageRequest(page, perPage, sort, order);
+        Page<Project> allByStudentId = projectRepo.findAllByStudentId(request, studentId);
+
+        return new PageImpl<>(allByStudentId.stream()
+                .map(p -> mapper.convertValue(p, ProjectInfoResponse.class))
+                .collect(Collectors.toList()));
+    }
 }

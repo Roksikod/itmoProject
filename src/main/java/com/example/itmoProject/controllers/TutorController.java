@@ -53,10 +53,5 @@ public class TutorController {
         return tutorService.getAllTutors(page, perPage, sort, order);
     }
 
-    @GetMapping("/getStudentsList/{id}")
-    @Operation(summary = "Получение списка студентов куратора")
-    public List<CourseInfoResponse> getStudentsList(@PathVariable Long id) {
-        return tutorService.getStudentsList(id);
-    }
 }
 

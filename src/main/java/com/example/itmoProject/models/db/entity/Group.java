@@ -39,4 +39,8 @@ public class Group {
     @ManyToOne
     @JsonBackReference(value = "course_groups")
     Course course;
+
+    @ManyToOne
+    @JsonBackReference(value = "tutor_groups")
+    Tutor tutor;
 }

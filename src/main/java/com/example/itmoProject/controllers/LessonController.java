@@ -1,5 +1,6 @@
 package com.example.itmoProject.controllers;
 
+import com.example.itmoProject.models.dto.response.GroupInfoResponse;
 import com.example.itmoProject.models.dto.response.LessonInfoResponse;
 import com.example.itmoProject.models.dto.response.ProjectInfoResponse;
 import com.example.itmoProject.servicies.LessonService;
@@ -53,10 +54,21 @@ public class LessonController {
         return lessonService.getAllLessons(page, perPage, sort, order);
     }
 
-    @PostMapping("/linkLesson/Student/{lessonId}/{studentId}")
+    @PostMapping("/linkLessonStudent/{lessonId}/{studentId}")
     @Operation(summary = "Назначение урока студенту")
     public LessonInfoResponse linkLessonStudent(@PathVariable Long studentId, @PathVariable Long lessonId) {
         return lessonService.linkLessonStudent(studentId, lessonId);
     }
+
+    @GetMapping("/studentLessons/{studentId}")
+    @Operation(summary = "Получение списка уроков студента")
+    public Page<LessonInfoResponse> getStudentLessons(@PathVariable Long studentId,
+                                                      @RequestParam(defaultValue = "1") Integer page,
+                                                      @RequestParam(defaultValue = "10") Integer perPage,
+                                                      @RequestParam(defaultValue = "titleLesson") String sort,
+                                                      @RequestParam(defaultValue = "ASC") Sort.Direction order) {
+        return lessonService.getStudentLessons(studentId, page, perPage, sort, order);
+    }
+
 }
 

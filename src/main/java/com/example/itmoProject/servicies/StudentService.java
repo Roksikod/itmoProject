@@ -24,18 +24,14 @@ public interface StudentService {
 
     Page<StudentInfoResponse> getAllStudents(Integer page, Integer perPage, String sort, Sort.Direction order);
 
-    //работа с проектами студента
+
     Student updateStudentProjectsList(Student student);
 
-    List<ProjectInfoResponse> getStudentProjectsList(Long studentId);
-
-    //работа с уроками студента
     Student updateStudentLessonsList(Student student);
 
-    List<LessonInfoResponse> getStudentLessonsList(Long studentId);
 
-    //назначение студенту куратора
     StudentInfoResponse linkTutorStudent(Long tutorId, Long studentId);
 
+    Page<StudentInfoResponse> getTutorStudents(Long tutorId, Integer page, Integer perPage, String sort, Sort.Direction order);
 }
 

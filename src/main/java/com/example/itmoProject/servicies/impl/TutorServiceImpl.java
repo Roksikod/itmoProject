@@ -110,17 +110,5 @@ public class TutorServiceImpl implements TutorService {
     public Tutor updateStudentsList(Tutor tutor) {
         return tutorRepo.save(tutor);
     }
-
-
-    @Override
-    public List<CourseInfoResponse> getStudentsList(Long tutorId) {
-        Tutor tutor = getTutorDb(tutorId);
-        List<CourseInfoResponse> students = tutor.getStudents()
-                .stream()
-                .map(student -> mapper.convertValue(student, CourseInfoResponse.class))
-                .collect(Collectors.toList());
-
-        return students;
-    }
 }
 

@@ -55,4 +55,8 @@ public class Tutor {
     @OneToMany
     @JsonManagedReference(value = "tutor_students")
     List<Student> students;
+
+    @OneToMany
+    @JsonManagedReference(value = "tutor_groups")
+    List<Group> groups;
 }

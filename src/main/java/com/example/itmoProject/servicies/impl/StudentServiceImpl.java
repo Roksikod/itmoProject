@@ -114,34 +114,11 @@ public class StudentServiceImpl implements StudentService {
         return studentRepo.save(student);
     }
 
-
-    @Override
-    public List<ProjectInfoResponse> getStudentProjectsList(Long studentId) {
-        Student student = getStudentDb(studentId);
-        List<ProjectInfoResponse> projects = student.getProjects()
-                .stream()
-                .map(project -> mapper.convertValue(project, ProjectInfoResponse.class))
-                .collect(Collectors.toList());
-
-        return projects;
-    }
-
     @Override
     public Student updateStudentLessonsList(Student student) {
         return studentRepo.save(student);
     }
 
-
-    @Override
-    public List<LessonInfoResponse> getStudentLessonsList(Long studentId) {
-        Student student = getStudentDb(studentId);
-        List<LessonInfoResponse> lessons = student.getLessons()
-                .stream()
-                .map(lesson -> mapper.convertValue(lesson, LessonInfoResponse.class))
-                .collect(Collectors.toList());
-
-        return lessons;
-    }
 
     public StudentInfoResponse linkTutorStudent(Long studentId, Long tutorId) {
         Student student = getStudentDb(studentId);
@@ -158,5 +135,15 @@ public class StudentServiceImpl implements StudentService {
 
         studentInfoResponse.setTutor(tutorInfoResponse);
         return studentInfoResponse;
+    }
+    @Override
+    public Page<StudentInfoResponse> getTutorStudents(Long tutorId, Integer page, Integer perPage, String sort, Sort.Direction order) {
+        tutorService.getTutorDb(tutorId);
+        Pageable request = PaginationUtil.getPageRequest(page, perPage, sort, order);
+        Page<Student> allByTutorId = studentRepo.findAllByTutorId(request, tutorId);
+
+        return new PageImpl<>(allByTutorId.stream()
+                .map(s -> mapper.convertValue(s, StudentInfoResponse.class))
+                .collect(Collectors.toList()));
     }
 }

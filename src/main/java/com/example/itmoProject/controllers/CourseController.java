@@ -1,6 +1,7 @@
 package com.example.itmoProject.controllers;
 
 import com.example.itmoProject.models.dto.response.CourseInfoResponse;
+import com.example.itmoProject.models.dto.response.GroupInfoResponse;
 import com.example.itmoProject.servicies.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -47,4 +48,5 @@ public class CourseController {
         public List<CourseInfoResponse> getAllCourses() {
             return courseService.getAllCourses();
         }
+
 }

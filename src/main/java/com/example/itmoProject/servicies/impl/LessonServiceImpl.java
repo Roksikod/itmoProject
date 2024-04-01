@@ -6,7 +6,6 @@ import com.example.itmoProject.models.db.entity.Student;
 import com.example.itmoProject.models.db.repositories.LessonRepo;
 import com.example.itmoProject.models.dto.request.LessonInfoRequest;
 import com.example.itmoProject.models.dto.response.LessonInfoResponse;
-import com.example.itmoProject.models.dto.response.CourseInfoResponse;
 import com.example.itmoProject.models.dto.response.StudentInfoResponse;
 import com.example.itmoProject.models.enums.Status;
 import com.example.itmoProject.servicies.LessonService;
@@ -113,5 +112,17 @@ public class LessonServiceImpl implements LessonService {
         lessonInfoResponse.setStudent(studentInfoResponse);
         return lessonInfoResponse;
     }
+
+    @Override
+    public Page<LessonInfoResponse> getStudentLessons(Long studentId, Integer page, Integer perPage, String sort, Sort.Direction order) {
+        studentService.getStudentDb(studentId);
+        Pageable request = PaginationUtil.getPageRequest(page, perPage, sort, order);
+        Page<Lesson> allByStudentId = lessonRepo.findAllByStudentId(request, studentId);
+
+        return new PageImpl<>(allByStudentId.stream()
+                .map(l -> mapper.convertValue(l, LessonInfoResponse.class))
+                .collect(Collectors.toList()));
+    }
+
 }
 

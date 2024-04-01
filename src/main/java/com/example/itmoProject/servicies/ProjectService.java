@@ -17,4 +17,5 @@ public interface ProjectService {
     Page<ProjectInfoResponse> getAllProjects(Integer page, Integer perPage, String sort, Sort.Direction order);
     ProjectInfoResponse linkProjectStudent(Long studentId, Long projectId);
 
+    Page<ProjectInfoResponse> getStudentProjects(Long studentId, Integer page, Integer perPage, String sort, Sort.Direction order);
 }
