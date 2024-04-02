@@ -12,7 +12,7 @@ public interface LessonService {
 
     LessonInfoResponse getLesson(Long id);
 
-    LessonInfoResponse updateLesson(Long id, LessonInfoResponse request);
+    LessonInfoResponse updateLesson(Long id, LessonInfoRequest request);
 
     Page<LessonInfoResponse> getAllLessons(Integer page, Integer perPage, String sort, Sort.Direction order);
 

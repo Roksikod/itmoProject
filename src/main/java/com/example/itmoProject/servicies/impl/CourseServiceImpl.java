@@ -60,7 +60,6 @@ public class CourseServiceImpl implements CourseService {
         Course course = getCourseDb(id);
         course.setTitleCourse(request.getTitleCourse() == null ? course.getTitleCourse() : request.getTitleCourse());
 
-
         course.setUpdatedAt(LocalDateTime.now());
         course = courseRepo.save(course);
 

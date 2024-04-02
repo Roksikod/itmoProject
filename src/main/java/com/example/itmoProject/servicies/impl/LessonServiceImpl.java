@@ -56,7 +56,7 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public LessonInfoResponse updateLesson(Long id, LessonInfoResponse request) {
+    public LessonInfoResponse updateLesson(Long id, LessonInfoRequest request) {
         Lesson lesson = getLessonDb(id);
 
         lesson.setTitleLesson(request.getTitleLesson() == null ? lesson.getTitleLesson() : request.getTitleLesson());

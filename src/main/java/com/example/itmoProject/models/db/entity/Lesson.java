@@ -5,6 +5,10 @@ import com.example.itmoProject.models.enums.Level;
 import com.example.itmoProject.models.enums.Status;
 import com.example.itmoProject.models.enums.Topic;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,9 +53,13 @@ public class Lesson {
     Status status;
 
     @Column(name = "created_at")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     LocalDateTime createdAt;
 
     @Column(name = "updated_at")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     LocalDateTime updatedAt;
 
     @ManyToOne

@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+
+import javax.validation.constraints.NotEmpty;
+
 @Getter
 @Setter
 @SuperBuilder
@@ -12,7 +15,8 @@ import lombok.experimental.SuperBuilder;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CourseInfoRequest {
-        String titleCourse;
+    @NotEmpty(message = "titleCourse must be set")
+    String titleCourse;
     }
 
 
