@@ -10,7 +10,7 @@ public interface ProjectService {
 
     ProjectInfoResponse getProject(Long id);
 
-    ProjectInfoResponse updateProject(Long id, ProjectInfoResponse request);
+    ProjectInfoResponse updateProject(Long id, ProjectInfoRequest request);
 
     void deleteProject(Long id);
 

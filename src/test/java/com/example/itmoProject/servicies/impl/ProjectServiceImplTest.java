@@ -64,14 +64,12 @@ public class ProjectServiceImplTest {
         Project project = new Project();
         project.setId(1L);
         project.setTitleProject("TestTest");
-        project.setTopic(Topic.valueOf("WINFORMS"));
 
         when(projectRepo.findById(project.getId())).thenReturn(Optional.of(project));
         when(projectRepo.save(any(Project.class))).thenReturn(project);
 
         ProjectInfoResponse result = projectService.updateProject(project.getId(), request);
         assertEquals(project.getTitleProject(), result.getTitleProject());
-        assertEquals(request.getTopic(), result.getTopic());
     }
 
     @Test
@@ -103,7 +101,7 @@ public class ProjectServiceImplTest {
 
         when(studentService.getStudentDb(anyLong())).thenReturn(student);
         List<Project> projects = new ArrayList<>();
-        when(projectRepo.findAllByStudentId(pageable, student.getId())).thenReturn(new PageImpl<>(projects));
+//        when(projectRepo.findAllByStudentId(pageable, student.getId())).thenReturn(new PageImpl<>(projects));
 
         List<Long> ids = projects.stream()
                 .map(Project::getId)

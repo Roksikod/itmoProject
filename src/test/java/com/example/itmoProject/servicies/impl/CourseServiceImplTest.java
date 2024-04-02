@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -45,6 +46,11 @@ public class CourseServiceImplTest {
         CourseInfoResponse result = courseService.createCourse(request);
         assertEquals(Long.valueOf(1L), result.getId());
     }
+    @Test(expected = NullPointerException.class)
+    public void createCourseInvalidTitle() {
+        CourseInfoRequest request = new CourseInfoRequest();
+        courseService.createCourse(request);
+    }
 
     @Test
     public void createCourseExists() {
@@ -61,13 +67,32 @@ public class CourseServiceImplTest {
 
     @Test
     public void getCourse() {
+        CourseInfoRequest request = new CourseInfoRequest();
+        request.setTitleCourse("test");
+
+        Course course = new Course();
+        course.setId(1L);
+
+        when(courseRepo.findByTitleCourse(anyString())).thenReturn(Optional.of(course));
+
+        CourseInfoResponse result =courseService.getCourse(course.getId());
+        assertEquals(Long.valueOf(1L), result.getId());
     }
 
     @Test
     public void getCourseDb() {
+        CourseInfoRequest request = new CourseInfoRequest();
+        request.setTitleCourse("test");
+
+        Course course = new Course();
+        course.setId(1L);
+
+        courseService.getCourseDb(course.getId());
+
+       // mapper.convertValue(getCourseDb(id), CourseInfoResponse.class);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void updateCourse() {
         CourseInfoRequest request = new CourseInfoRequest();
         request.setTitleCourse("TestTitleCourse");

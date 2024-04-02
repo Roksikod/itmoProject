@@ -70,7 +70,7 @@ public class TutorServiceImplTest {
     public void getTutorDb() {
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void updateTutor() {
         TutorInfoRequest request = new TutorInfoRequest();
         request.setAge(30);

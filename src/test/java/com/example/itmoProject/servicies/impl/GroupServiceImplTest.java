@@ -51,7 +51,7 @@ public class GroupServiceImplTest {
         Group group = new Group();
         group.setId(1L);
 
-        when(groupRepo.save(any(Group.class))).thenReturn(group);
+//        when(groupRepo.save(any(Group.class))).thenReturn(group);
         GroupInfoResponse result = groupService.createGroup(request);
         assertEquals(Long.valueOf(1L), result.getId());
     }
@@ -64,7 +64,7 @@ public class GroupServiceImplTest {
     public void getGroupDb() {
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void updateGroup() {
         GroupInfoRequest request = new GroupInfoRequest();
         request.setTitleGroup("TestTitleGroup");
@@ -109,7 +109,7 @@ public class GroupServiceImplTest {
 
         when(courseService.getCourseDb(anyLong())).thenReturn(course);
         List<Group> groups = new ArrayList<>();
-        when(groupRepo.findAllByCourseId(pageable, course.getId())).thenReturn(new PageImpl<>(groups));
+//        when(groupRepo.findAllByCourseId(pageable, course.getId())).thenReturn(new PageImpl<>(groups));
 
         List<Long> ids = groups.stream()
                 .map(Group::getId)

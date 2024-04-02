@@ -56,7 +56,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectInfoResponse updateProject(Long id, ProjectInfoResponse request) {
+    public ProjectInfoResponse updateProject(Long id, ProjectInfoRequest request) {
         Project project = getProjectDb(id);
 
         project.setTitleProject(request.getTitleProject() == null ? project.getTitleProject() : request.getTitleProject());

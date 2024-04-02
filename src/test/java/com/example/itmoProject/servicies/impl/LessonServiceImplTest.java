@@ -82,7 +82,7 @@ public class LessonServiceImplTest {
         assertEquals(lesson.getLessonStatus(), result.getLessonStatus());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void deleteLesson() {
         Lesson lesson = new Lesson();
         lesson.setId(1L);
@@ -110,7 +110,7 @@ public class LessonServiceImplTest {
 
         when(studentService.getStudentDb(anyLong())).thenReturn(student);
         List<Lesson> lessons = new ArrayList<>();
-        when(lessonRepo.findAllByStudentId(pageable, student.getId())).thenReturn(new PageImpl<>(lessons));
+//        when(lessonRepo.findAllByStudentId(pageable, student.getId())).thenReturn(new PageImpl<>(lessons));
 
         List<Long> ids = lessons.stream()
                 .map(Lesson::getId)

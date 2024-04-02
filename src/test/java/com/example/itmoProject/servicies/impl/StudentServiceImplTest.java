@@ -82,7 +82,7 @@ public class StudentServiceImplTest {
     public void getStudentDb() {
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void updateStudent() {
         StudentInfoRequest request = new StudentInfoRequest();
         request.setAge(30);
@@ -136,7 +136,7 @@ public class StudentServiceImplTest {
 
         when(tutorService.getTutorDb(anyLong())).thenReturn(tutor);
         List<Student> students = new ArrayList<>();
-        when(studentRepo.findAllByTutorId(pageable, tutor.getId())).thenReturn(new PageImpl<>(students));
+        //when(studentRepo.findAllByTutorId(pageable, tutor.getId())).thenReturn(new PageImpl<>(students));
 
         List<Long> ids = students.stream()
                 .map(Student::getId)
