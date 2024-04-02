@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -46,9 +47,10 @@ public class CourseServiceImplTest {
         CourseInfoResponse result = courseService.createCourse(request);
         assertEquals(Long.valueOf(1L), result.getId());
     }
-    @Test(expected = NullPointerException.class)
+    @Test(expected = CustomException.class)
     public void createCourseInvalidTitle() {
         CourseInfoRequest request = new CourseInfoRequest();
+        request.setTitleCourse("");
         courseService.createCourse(request);
     }
 
