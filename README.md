@@ -4,4 +4,6 @@
 - Spring Boot
 - Rest API
 - CRUD-functional
-- PosgreSQL
+- PostgreSQL
+- DTO
+
